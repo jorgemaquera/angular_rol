@@ -13,6 +13,7 @@ export class LoginService {
   private _usuario: Usuario;
   private _token : string;
   private _userD:UsuarioDatos;
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json'});
 
   constructor(private http:HttpClient) { }
   private agregarAutorizationHeader(){
@@ -81,5 +82,17 @@ export class LoginService {
     this._usuario = null;
     sessionStorage.clear();
    // sessionStorage.removeItem('token');
+  }
+
+  obtenerOpciones(id: number): Observable<Object>{
+    return this.http.get<Object>('http://localhost:8081/opciones/datos/'+id, {headers: this.agregarAutorizacion()});
+  }
+
+  private agregarAutorizacion(){
+    let token = this.token;
+    if(token!=null){
+      return this.httpHeaders.append('Authorization','Bearer' + token);
+    }
+    return this.httpHeaders;
   }
 }

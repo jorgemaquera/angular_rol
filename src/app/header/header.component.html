@@ -26,7 +26,12 @@
           </ul>
           <ul class="navbar-nav mr-auto" *ngIf="loginService.isAuthenticated()">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Buses</a>
+                    <a class="nav-link" href="" (click)="obtenerOpciones()">Buses</a>
+                </li>
+                <li *ngFor="let o of opciones">
+                  <a class="nav-link" href="">
+                    <i class="" [ngClass]="o.icono"></i>
+                     {{ o.menu }}</a>
                 </li>
           </ul>
           <ul class="navbar-nav ml-auto nav-flex-icons">

@@ -34,10 +34,11 @@ export class UsuarioComponent implements OnInit {
       this.loginService.guardarToken(response.access_token);
       let usuario = this.loginService.usuarioDato;
       this.router.navigate(['/']);
+      window.location.reload();
       Swal.fire('Login', 'Bienvenido: <b>'+this.loginService.usuarioDato.username+'</b> has iniciado Sesión con éxito..!','success');
       
     }, error =>{
-      if(error.status==400){
+      if(error.status==401){
         Swal.fire('Error Login', 'Usuario o clave incorrectas!', 'error');
       }
     }
